@@ -1,0 +1,123 @@
+// Backbone.ChildViewContainer
+// ---------------------------
+//
+// Provide a container to store, retrieve and
+// shut down child views.
+
+Backbone.ChildViewContainer = function(options){
+  this._views = {};
+  this._indexByModel = {};
+  this._indexByCollection = {};
+  this._indexByCustom = {};
+}
+
+// ChildViewContainer Methods
+// --------------------------
+
+_.extend(Backbone.ChildViewContainer.prototype, {
+
+  // Add a view to this container. Stores the view
+  // by `cid` and makes it searchable by the model
+  // and/or collection of the view. Optionally specify
+  // a custom key to store an retrieve the view.
+  add: function(view, customIndex){
+    var viewCid = view.cid;
+
+    // store the view
+    this._views[viewCid] = view;
+
+    // index it by model
+    if (view.model){
+      this._indexByModel[view.model.cid] = viewCid;
+    }
+
+    // index it by collection
+    if (view.collection){
+      this._indexByCollection[view.collection.cid] = viewCid;
+    }
+
+    // index by custom
+    if (customIndex){
+      this._indexByCustom[customIndex] = viewCid;
+    }
+  },
+
+  // Find a view by the model that was attached to
+  // it. Uses the model's `cid` to find it, and
+  // retrieves the view by it's `cid` from the result
+  findByModel: function(model){
+    var viewCid = this._indexByModel[model.cid];
+    return this.findByCid(viewCid);
+  },
+
+  // Find a view by the collection that was attached to
+  // it. Uses the collection's `cid` to find it, and
+  // retrieves the view by it's `cid` from the result
+  findByCollection: function(col){
+    var viewCid = this._indexByCollection[col.cid];
+    return this.findByCid(viewCid);
+  },
+
+  // Find a view by a custom indexer.
+  findByCustom: function(index){
+    var viewCid = this._indexByCustom[index];
+    return this.findByCid(viewCid);
+  },
+
+  // retrieve a view by it's `cid` directly
+  findByCid: function(cid){
+    return this._views[cid];
+  },
+
+  // Remove a view
+  remove: function(view){
+    var viewCid = view.cid;
+
+    // delete model index
+    if (view.model){
+      delete this._indexByModel[view.model.cid];
+    }
+
+    // delete collection index
+    if (view.collection){
+      delete this._indexByCollection[view.collection.cid];
+    }
+
+    // delete custom index
+    var cust;
+    _.each(_.keys(this._indexByCustom), function(key){
+      var value = this._indexByCustom[key];
+      if (value === viewCid){
+        cust = key;
+      }
+    }, this);
+
+    if (cust){
+      delete this._indexByCustom[cust];
+    }
+
+    // remove the view from the container
+    delete this._views[viewCid];
+  },
+
+  // Call a method on every view in the container,
+  // passing parameters to the call method one at a
+  // time, like `function.call`.
+  call: function(method, args){
+    args = Array.prototype.slice.call(arguments, 1);
+    this.apply(method, args);
+  },
+
+  // Apply a method on every view in the container,
+  // passing parameters to the call method one at a
+  // time, like `function.apply`.
+  apply: function(method, args){
+    var view;
+    _.each(this._views, function(view, key){
+      if (_.isFunction(view[method])){
+        view[method].apply(view, args);
+      }
+    });
+  }
+
+});
