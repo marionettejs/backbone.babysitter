@@ -16,6 +16,10 @@ describe("childview container", function(){
     it("should make the view retrievable by the view's cid", function(){
       expect(foundView).toBe(view);
     });
+
+    it("should update the size of the chidren", function(){
+      expect(container.length).toBe(1);
+    })
   });
 
   describe("when adding a view that has a model, to the container", function(){
@@ -125,6 +129,10 @@ describe("childview container", function(){
 
       container.remove(view);
     });
+
+    it("should update the size of the chidren", function(){
+      expect(container.length).toBe(0);
+    })
 
     it("should remove the index by model", function(){
       var v = container.findByModel(model);

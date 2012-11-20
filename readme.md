@@ -144,9 +144,30 @@ container.apply("doStuff", [1, 2]);
 If any given view within the container does not have the method specified, it
 will not be called on that view. No errors will be thrown in this situation.
 
-## Release History
+### Get The Number Of Stored Views
 
-* v0.0.0 initial release
+To get the number of stored views, call the `container.length` 
+attribute. This attribute is updated any time a view is added or 
+removed.
+
+```js
+var container = new Backbone.ChildViewContainer();
+
+container.add(view);
+container.add(v2);
+container.add(v3);
+
+console.log(container.length); //=> 3
+
+container.remove(v2);
+
+console.log(container.length); //=> 2
+```
+
+## ChangeLog
+
+For a complete change log, see the [CHANGELOG.md](https://raw.github.com/marionettejs/backbone.babysitter/master/CHANGELOG.md)
+file.
 
 ## License
 

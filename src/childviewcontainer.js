@@ -40,6 +40,8 @@ _.extend(Backbone.ChildViewContainer.prototype, {
     if (customIndex){
       this._indexByCustom[customIndex] = viewCid;
     }
+
+    this._updateLength();
   },
 
   // Find a view by the model that was attached to
@@ -101,6 +103,9 @@ _.extend(Backbone.ChildViewContainer.prototype, {
 
     // remove the view from the container
     delete this._views[viewCid];
+
+    // update the length
+    this._updateLength();
   },
 
   // Call a method on every view in the container,
@@ -121,6 +126,11 @@ _.extend(Backbone.ChildViewContainer.prototype, {
         view[method].apply(view, args);
       }
     });
+  },
+
+  // Update the `.length` attribute on this container
+  _updateLength: function(){
+    this.length = _.size(this._views);
   }
 
 });
