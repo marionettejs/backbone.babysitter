@@ -88,6 +88,9 @@ var cv = container.findByCollection(collectionView.collection);
 
 // find by custom key
 var custv = container.findByCustom("an indexer");
+
+// find by numeric index (unstable)
+var custv = container.findByIndex(0);
 ```
 
 If the `findBy*` method cannot find the view, it will return undefined.

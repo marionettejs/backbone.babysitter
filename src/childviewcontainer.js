@@ -9,6 +9,7 @@ Backbone.ChildViewContainer = function(options){
   this._indexByModel = {};
   this._indexByCollection = {};
   this._indexByCustom = {};
+  this._updateLength();
 };
 
 // ChildViewContainer Methods
@@ -64,6 +65,12 @@ _.extend(Backbone.ChildViewContainer.prototype, {
   findByCustom: function(index){
     var viewCid = this._indexByCustom[index];
     return this.findByCid(viewCid);
+  },
+
+  // Find by index. This is not guaranteed to be a
+  // stable index.
+  findByIndex: function(index){
+    return _.values(this._views)[index];
   },
 
   // retrieve a view by it's `cid` directly

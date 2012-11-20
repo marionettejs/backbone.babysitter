@@ -1,7 +1,7 @@
 describe("childview container", function(){
 
   describe("when adding a view that does not have a model or collection, to the container", function(){
-    var container, view, foundView;
+    var container, view, foundView, indexView;
 
     beforeEach(function(){
       view = new Backbone.View();
@@ -11,10 +11,15 @@ describe("childview container", function(){
       container.add(view);
 
       foundView = container.findByCid(view.cid);
+      indexView = container.findByIndex(0);
     });
 
     it("should make the view retrievable by the view's cid", function(){
       expect(foundView).toBe(view);
+    });
+
+    it("should make the view retrievable by numeric index", function(){
+      expect(indexView).toBe(view);
     });
 
     it("should update the size of the chidren", function(){
