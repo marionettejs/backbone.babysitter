@@ -237,4 +237,29 @@ describe("childview container", function(){
 
   });
 
+  describe("iterators and collection functions", function(){
+    var container, view, views;
+
+    beforeEach(function(){
+      views = [];
+      view = new Backbone.View();
+
+      container = new Backbone.ChildViewContainer();
+      container.add(view);
+
+      container.each(function(v, k){
+        views.push(v);
+      });
+    });
+
+    it("should provide a .each iterator", function(){
+      expect(_.isFunction(container.each)).toBe(true);
+    });
+
+    it("should iterate the views with the .each function", function(){
+      expect(views[0]).toBe(view);
+    });
+
+  });
+
 });

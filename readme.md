@@ -167,6 +167,54 @@ container.remove(v2);
 console.log(container.length); //=> 2
 ```
 
+### Iterators And Collection Functions
+
+The container object borrows several functions from Underscore.js, to
+provide iterators and other collection functions, including:
+
+* forEach
+* each
+* map
+* find
+* detect
+* filter
+* select
+* reject
+* every
+* all
+* some
+* any
+* include
+* contains
+* invoke
+* toArray
+* first
+* initial
+* rest
+* last
+* without
+* isEmpty
+
+These methods can be called directly on the container, to iterate and
+process the views held by the container.
+
+```js
+var container = new Backbone.ChildViewContainer();
+
+container.add(v1);
+container.add(v2);
+container.add(v3);
+
+// iterate over all of the views
+contianer.each(function(view){
+  
+  // process each view individually, here
+
+});
+```
+
+For more information about these methods, see the [Underscore.js documentation](http://underscorejs.org).
+
 ## ChangeLog
 
 For a complete change log, see the [CHANGELOG.md](https://github.com/marionettejs/backbone.babysitter/blob/master/CHANGELOG.md)

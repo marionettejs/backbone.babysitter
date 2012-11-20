@@ -1,7 +1,7 @@
 {
   "name": "Backbone.BabySitter",
   "description": "Manage child views in a Backbone.View",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://github.com/marionettejs/backbone.babysitter",
   "keywords": [
     "backbone",
