@@ -206,7 +206,7 @@ container.add(v2);
 container.add(v3);
 
 // iterate over all of the views
-contianer.each(function(view){
+container.each(function(view){
   
   // process each view individually, here
 
