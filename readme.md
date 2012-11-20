@@ -169,9 +169,9 @@ console.log(container.length); //=> 2
 
 ## ChangeLog
 
-For a complete change log, see the [CHANGELOG.md](https://raw.github.com/marionettejs/backbone.babysitter/master/CHANGELOG.md)
+For a complete change log, see the [CHANGELOG.md](https://github.com/marionettejs/backbone.babysitter/blob/master/CHANGELOG.md)
 file.
 
 ## License
 
-MIT - see [LICENSE.md](https://raw.github.com/marionettejs/backbone.babysitter/master/LICENSE.md)
+MIT - see [LICENSE.md](https://github.com/marionettejs/backbone.babysitter/blob/master/LICENSE.md)
