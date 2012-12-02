@@ -135,7 +135,7 @@ Backbone.ChildViewContainer = (function(Backbone, _){
       var view;
       _.each(this._views, function(view, key){
         if (_.isFunction(view[method])){
-          view[method].apply(view, args);
+          view[method].apply(view, args || []);
         }
       });
     },
