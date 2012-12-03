@@ -133,11 +133,16 @@ Backbone.ChildViewContainer = (function(Backbone, _){
     // time, like `function.apply`.
     apply: function(method, args){
       var view;
+
+      // fix for IE < 9
+      args = args || [];
+
       _.each(this._views, function(view, key){
         if (_.isFunction(view[method])){
-          view[method].apply(view, args || []);
+          view[method].apply(view, args);
         }
       });
+
     },
 
     // Update the `.length` attribute on this container
