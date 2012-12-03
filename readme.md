@@ -194,6 +194,7 @@ provide iterators and other collection functions, including:
 * last
 * without
 * isEmpty
+* pluck
 
 These methods can be called directly on the container, to iterate and
 process the views held by the container.
