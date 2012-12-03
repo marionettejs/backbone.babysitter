@@ -1,5 +1,23 @@
 describe("childview container", function(){
 
+  describe("when providing an array of views to the constructor", function(){
+    var container;
+
+    beforeEach(function(){
+      var views = [
+        new Backbone.View(),
+        new Backbone.View(),
+        new Backbone.View()
+      ]
+      container = new Backbone.ChildViewContainer(views);
+    });
+
+    it("should add all of the views", function(){
+      expect(container.length).toBe(3);
+    });
+
+  });
+
   describe("when adding a view that does not have a model or collection, to the container", function(){
     var container, view, foundView, indexView;
 

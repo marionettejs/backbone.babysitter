@@ -3,6 +3,8 @@
 ### v0.0.4
 
 * Added a fix for IE < 9, when applying a function to the views
+* Added `.pluck` as a method, from Underscore.js
+* Can specify an array of views to the container constructor
 
 ### v0.0.3
 
