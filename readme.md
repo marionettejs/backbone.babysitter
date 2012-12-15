@@ -113,7 +113,7 @@ indexes.
 ```js
 var container = new Backbone.ChildViewContainer();
 
-continer.add(view);
+container.add(view);
 
 // some time later
 container.remove(view);
