@@ -1,5 +1,9 @@
 # Change log
 
+### v0.0.5
+
+* Updated build process to use GruntJS v0.4
+
 ### v0.0.4
 
 * Added a fix for IE < 9, when applying a function to the views

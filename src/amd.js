@@ -14,7 +14,7 @@
 }(this, function (_, Backbone) {
   "option strict";
 
-  //= childviewcontainer.js
+  // @include childviewcontainer.js
   return Backbone.ChildViewContainer; 
 
 }));
