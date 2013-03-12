@@ -10,7 +10,7 @@ difficult to do on your own, but it gets tedious to write the same code
 over and over again.
 
 Backbone.BabySitter provides a simple way to manage an unknown number of
-child views within a Backbone.View, or other object that needst to track a
+child views within a Backbone.View, or other object that needs to track a
 list of views.
 
 ## Downloads And Source
