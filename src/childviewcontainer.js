@@ -9,14 +9,14 @@ Backbone.ChildViewContainer = (function(Backbone, _){
   // Container Constructor
   // ---------------------
 
-  var Container = function(initialViews){
+  var Container = function(views){
     this._views = {};
     this._indexByModel = {};
     this._indexByCollection = {};
     this._indexByCustom = {};
     this._updateLength();
 
-    this._addInitialViews(initialViews);
+    _.each(views, this.add, this);
   };
 
   // Container Methods
@@ -135,11 +135,6 @@ Backbone.ChildViewContainer = (function(Backbone, _){
     // Update the `.length` attribute on this container
     _updateLength: function(){
       this.length = _.size(this._views);
-    },
-
-    // set up an initial list of views
-    _addInitialViews: function(views){
-      _.each(views, this.add, this);
     }
   });
 
