@@ -93,6 +93,9 @@ var s = container.findByCid(someView.cid);
 // find by model
 var av = container.findByModel(anotherView.model);
 
+// find by model cid
+var av2 = container.findByModelCid(anotherView.model.cid);
+
 // find by collection
 var cv = container.findByCollection(collectionView.collection);
 
