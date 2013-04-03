@@ -53,12 +53,19 @@ Backbone.ChildViewContainer = (function(Backbone, _){
     },
 
     // Find a view by the model that was attached to
-    // it. Uses the model's `cid` to find it, and
-    // retrieves the view by it's `cid` from the result
+    // it. Uses the model's `cid` to find it.
     findByModel: function(model){
-      var viewCid = this._indexByModel[model.cid];
+      return this.findByModelCid(model.cid);
+    },
+
+    // Find a view by the `cid` of the model that was attached to
+    // it. Uses the model's `cid` to find the view `cid` and
+    // retrieve the view using it.
+    findByModelCid: function(modelCid){
+      var viewCid = this._indexByModel[modelCid];
       return this.findByCid(viewCid);
     },
+
 
     // Find a view by the collection that was attached to
     // it. Uses the collection's `cid` to find it, and
