@@ -69,5 +69,21 @@
       "lib/amd/backbone.babysitter.js",
       "readme.md"
     ]
-  }
+  },
+  "maintainers": [
+    {
+      "name": "Stefan Zerkalica",
+      "email": "zerkalica@gmail.com",
+      "web": "https://github.com/zerkalica"
+    },
+    {
+      "name": "Richard Mitchell",
+      "email": "richard.j.mitchell@gmail.com"
+    },
+    {
+      "name": "Joe Gornick",
+      "web": "http://joegornick.com",
+      "twitter": "https://twitter.com/jgornick"
+    }
+  ]
 }
