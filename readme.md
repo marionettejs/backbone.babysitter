@@ -4,7 +4,7 @@ Manage child views in a Backbone.View.
 
 ## About Backbone.BabySitter
 
-Backbone provides a lot of functionality in it's views, but does not directly
+Backbone provides a lot of functionality in its views, but does not directly
 provide a way to manage child views or nested views. This is not terribly
 difficult to do on your own, but it gets tedious to write the same code
 over and over again.
