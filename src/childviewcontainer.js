@@ -12,7 +12,6 @@ Backbone.ChildViewContainer = (function(Backbone, _){
   var Container = function(views){
     this._views = {};
     this._indexByModel = {};
-    this._indexByCollection = {};
     this._indexByCustom = {};
     this._updateLength();
 
@@ -26,7 +25,7 @@ Backbone.ChildViewContainer = (function(Backbone, _){
 
     // Add a view to this container. Stores the view
     // by `cid` and makes it searchable by the model
-    // and/or collection of the view. Optionally specify
+    // cid (and model itself). Optionally specify
     // a custom key to store an retrieve the view.
     add: function(view, customIndex){
       var viewCid = view.cid;
@@ -37,11 +36,6 @@ Backbone.ChildViewContainer = (function(Backbone, _){
       // index it by model
       if (view.model){
         this._indexByModel[view.model.cid] = viewCid;
-      }
-
-      // index it by collection
-      if (view.collection){
-        this._indexByCollection[view.collection.cid] = viewCid;
       }
 
       // index by custom
@@ -63,15 +57,6 @@ Backbone.ChildViewContainer = (function(Backbone, _){
     // retrieve the view using it.
     findByModelCid: function(modelCid){
       var viewCid = this._indexByModel[modelCid];
-      return this.findByCid(viewCid);
-    },
-
-
-    // Find a view by the collection that was attached to
-    // it. Uses the collection's `cid` to find it, and
-    // retrieves the view by it's `cid` from the result
-    findByCollection: function(col){
-      var viewCid = this._indexByCollection[col.cid];
       return this.findByCid(viewCid);
     },
 
@@ -99,11 +84,6 @@ Backbone.ChildViewContainer = (function(Backbone, _){
       // delete model index
       if (view.model){
         delete this._indexByModel[view.model.cid];
-      }
-
-      // delete collection index
-      if (view.collection){
-        delete this._indexByCollection[view.collection.cid];
       }
 
       // delete custom index
