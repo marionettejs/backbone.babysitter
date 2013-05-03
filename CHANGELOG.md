@@ -1,5 +1,10 @@
 # Change log
 
+### v0.0.6
+
+* Removed `.findByCollection` method
+* Added `.findByModelCid` method
+
 ### v0.0.5
 
 * Updated build process to use GruntJS v0.4
@@ -17,7 +22,7 @@
 ### v0.0.2
 
 * Added `.length` attribute
-* Added `.findByIndx` method
+* Added `.findByIndex` method
 
 ### v0.0.1
 
