@@ -18,7 +18,7 @@ describe("childview container", function(){
 
   });
 
-  describe("when adding a view that does not have a model or collection, to the container", function(){
+  describe("when adding a view that does not have a model to the container", function(){
     var container, view, foundView, indexView;
 
     beforeEach(function(){
@@ -66,56 +66,6 @@ describe("childview container", function(){
     });
   });
 
-  describe("when adding a view that has a collection, to the container", function(){
-    var container, view, foundView, col;
-
-    beforeEach(function(){
-      col = new Backbone.Collection();
-      view = new Backbone.View({
-        collection: col
-      });
-
-      container = new Backbone.ChildViewContainer();
-
-      container.add(view);
-
-      foundView = container.findByCollection(col);
-    });
-
-    it("should make the view retrievable by the collection", function(){
-      expect(foundView).toBe(view);
-    });
-  });
-
-  describe("when adding a view that has a model and collection, to the container", function(){
-    var container, view, mv, cv;
-
-    beforeEach(function(){
-      var col = new Backbone.Collection();
-      var model = new Backbone.Model();
-
-      view = new Backbone.View({
-        model: model,
-        collection: col
-      });
-
-      container = new Backbone.ChildViewContainer();
-
-      container.add(view);
-
-      mv = container.findByModel(model);
-      cv = container.findByCollection(col);
-    });
-
-    it("should make the view retrievable by the model", function(){
-      expect(mv).toBe(view);
-    });
-
-    it("should make the view retrievable by the collection", function(){
-      expect(cv).toBe(view);
-    });
-  });
-
   describe("when adding a view with a custom index value", function(){
     var container, view, foundView;
 
@@ -139,12 +89,10 @@ describe("childview container", function(){
 
     beforeEach(function(){
       model = new Backbone.Model();
-      col = new Backbone.Collection();
       cust = "custome indexer";
 
       view = new Backbone.View({
-        model: model,
-        collection: col
+        model: model
       });
 
       container = new Backbone.ChildViewContainer();
@@ -159,11 +107,6 @@ describe("childview container", function(){
 
     it("should remove the index by model", function(){
       var v = container.findByModel(model);
-      expect(v).toBeUndefined();
-    });
-
-    it("should remove the index by collection", function(){
-      var v = container.findByCollection(col);
       expect(v).toBeUndefined();
     });
 
