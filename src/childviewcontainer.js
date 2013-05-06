@@ -27,7 +27,7 @@ Backbone.ChildViewContainer = (function(Backbone, _){
     // Add a view to this container. Stores the view
     // by `cid` and makes it searchable by the model
     // and/or collection of the view. Optionally specify
-    // a custom key to store an retrieve the view.
+    // a custom key to store and retrieve the view.
     add: function(view, customIndex){
       var viewCid = view.cid;
 
