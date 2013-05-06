@@ -51,7 +51,6 @@ Views will be stored once and indexed in several ways:
 
 * by `view.cid`
 * by `view.model.cid` if the view has a model
-* by `view.collection.cid` if the view has a collection
 * by a custom index key
 
 When adding a view, you can optionally specify a custom index key 
@@ -95,9 +94,6 @@ var av = container.findByModel(anotherView.model);
 
 // find by model cid
 var av2 = container.findByModelCid(anotherView.model.cid);
-
-// find by collection
-var cv = container.findByCollection(collectionView.collection);
 
 // find by custom key
 var custv = container.findByCustom("an indexer");
