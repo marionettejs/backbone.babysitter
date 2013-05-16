@@ -72,7 +72,7 @@ Backbone.ChildViewContainer = (function(Backbone, _){
       return _.values(this._views)[index];
     },
 
-    // retrieve a view by it's `cid` directly
+    // retrieve a view by its `cid` directly
     findByCid: function(cid){
       return this._views[cid];
     },
