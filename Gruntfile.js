@@ -14,7 +14,7 @@ module.exports = function(grunt) {
         '// Copyright (c)<%= grunt.template.today("yyyy") %> Derick Bailey, Muted Solutions, LLC.\n' +
         '// Distributed under MIT license\n' +
         '//\n' + 
-        '// http://github.com/babysitterjs/backbone.babysitter\n' +
+        '// http://github.com/marionettejs/backbone.babysitter\n' +
         '\n'
     },
 
