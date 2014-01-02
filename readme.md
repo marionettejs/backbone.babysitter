@@ -204,6 +204,7 @@ provide iterators and other collection functions, including:
 * without
 * isEmpty
 * pluck
+* indexOf
 
 These methods can be called directly on the container, to iterate and
 process the views held by the container.
