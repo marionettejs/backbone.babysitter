@@ -44,6 +44,7 @@ Backbone.ChildViewContainer = (function(Backbone, _){
       }
 
       this._updateLength();
+      return this;
     },
 
     // Find a view by the model that was attached to
@@ -99,6 +100,7 @@ Backbone.ChildViewContainer = (function(Backbone, _){
 
       // update the length
       this._updateLength();
+      return this;
     },
 
     // Call a method on every view in the container,

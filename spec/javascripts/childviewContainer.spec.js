@@ -121,6 +121,28 @@ describe("childview container", function(){
     });
   });
 
+  describe("adding or removing a view", function(){
+    var container, view, model;
+
+    beforeEach(function(){
+      model = new Backbone.Model();
+
+      view = new Backbone.View({
+        model: model
+      });
+
+      container = new Backbone.ChildViewContainer();
+    });
+
+    it("should return itself when adding, for chaining methods", function(){
+      expect(container.add(view)).toBe(container);
+    });
+
+    it("should return itself when removing, for chaining methods", function(){
+      expect(container.remove(view)).toBe(container);
+    });
+  });
+
   describe("when a container has 2 views in it", function(){
 
     describe("and applying a method with parameters", function(){
