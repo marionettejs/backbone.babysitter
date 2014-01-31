@@ -1,5 +1,14 @@
 # Change log
 
+### v0.1.0
+* allow chaining of add and remove methods
+* add component.json
+
+#### General
+* update grunt file
+* readme fixed
+* fix gruntfile url
+
 ### v0.0.6
 
 * Removed `.findByCollection` method
