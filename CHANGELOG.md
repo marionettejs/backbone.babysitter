@@ -1,5 +1,10 @@
 # Change log
 
+### v0.1.1
+* lossen backbone dependency
+* remove jquery dependency
+* add underscore dependency
+
 ### v0.1.0
 * allow chaining of add and remove methods
 * add component.json
