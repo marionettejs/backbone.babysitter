@@ -55,7 +55,7 @@ module.exports = function(grunt) {
       },
       amd : {
         src : 'lib/amd/backbone.babysitter.js',
-        dest : 'lib/amd/backbone.babysitter.min.js',
+        dest : 'lib/amd/backbone.babysitter.min.js'
       },
       core : {
         src : 'lib/backbone.babysitter.js',
@@ -63,7 +63,7 @@ module.exports = function(grunt) {
         options : {
           sourceMap : 'lib/backbone.babysitter.map',
           sourceMappingURL : 'backbone.babysitter.map',
-          sourceMapPrefix : 2,
+          sourceMapPrefix : 2
         }
       }
     },
@@ -90,7 +90,7 @@ module.exports = function(grunt) {
         }
       },
       babysitter : {
-        src : ['src/*.js'],
+        src : ['src/*.js']
       }
     },
 

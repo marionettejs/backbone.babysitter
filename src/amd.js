@@ -12,7 +12,7 @@
 
   } 
 }(this, function (_, Backbone) {
-  "option strict";
+  "use strict";
 
   // @include childviewcontainer.js
   return Backbone.ChildViewContainer; 
