@@ -5,7 +5,7 @@
 // shut down child views.
 
 Backbone.ChildViewContainer = (function(Backbone, _){
-  
+
   // Container Constructor
   // ---------------------
 
@@ -39,7 +39,7 @@ Backbone.ChildViewContainer = (function(Backbone, _){
       }
 
       // index by custom
-      if (customIndex){
+      if (customIndex !== void(0) && customIndex !== null){
         this._indexByCustom[customIndex] = viewCid;
       }
 
@@ -132,9 +132,9 @@ Backbone.ChildViewContainer = (function(Backbone, _){
   //
   // Mix in methods from Underscore, for iteration, and other
   // collection related features.
-  var methods = ['forEach', 'each', 'map', 'find', 'detect', 'filter', 
-    'select', 'reject', 'every', 'all', 'some', 'any', 'include', 
-    'contains', 'invoke', 'toArray', 'first', 'initial', 'rest', 
+  var methods = ['forEach', 'each', 'map', 'find', 'detect', 'filter',
+    'select', 'reject', 'every', 'all', 'some', 'any', 'include',
+    'contains', 'invoke', 'toArray', 'first', 'initial', 'rest',
     'last', 'without', 'isEmpty', 'pluck'];
 
   _.each(methods, function(method) {

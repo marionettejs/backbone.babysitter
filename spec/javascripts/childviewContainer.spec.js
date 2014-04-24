@@ -84,6 +84,24 @@ describe("childview container", function(){
     });
   });
 
+  describe("when adding a view with 0 as custom index value", function(){
+    var container, view, foundView;
+
+    beforeEach(function(){
+      view = new Backbone.View();
+
+      container = new Backbone.ChildViewContainer();
+
+      container.add(view, 0);
+
+      foundView = container.findByCustom(0);
+    });
+
+    it("should make the view retrievable by the custom indexer", function(){
+      expect(foundView).toBe(view);
+    });
+  });
+
   describe("when removing a view", function(){
     var container, view, model, col, cust;
 
