@@ -64,6 +64,25 @@ Note that the custom indexer should be unique within the container. If you
 add two different views with the same custom indexer, the last one in will
 be the only one stored by that index key.
 
+You can also add a view at a specified index.
+
+```js
+container.add(aView, {at: 2});
+```
+
+Note that if you try to add a view at an out of range index, it will simply
+append the end of the container.
+
+if you wish to add at a specific index and specify a `customIndex`, you
+can pass both options like this:
+
+```js
+container.add(aView, {customIndex: "an index", at: 2});
+```
+
+Note that if you try to add a view at an out of range index, it will simply
+append the end of the container.
+
 ### Constructing With Views
 
 An initial list of views can be added to the container through the
@@ -98,7 +117,7 @@ var av2 = container.findByModelCid(anotherView.model.cid);
 // find by custom key
 var custv = container.findByCustom("an indexer");
 
-// find by numeric index (unstable)
+// find by numeric index
 var custv = container.findByIndex(0);
 ```
 
