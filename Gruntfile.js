@@ -6,14 +6,14 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     meta: {
       version: '<%= pkg.version %>',
-      banner: 
+      banner:
         '// Backbone.BabySitter\n' +
-        '// -------------------\n' + 
+        '// -------------------\n' +
         '// v<%= pkg.version %>\n' +
-        '//\n' + 
+        '//\n' +
         '// Copyright (c)<%= grunt.template.today("yyyy") %> Derick Bailey, Muted Solutions, LLC.\n' +
         '// Distributed under MIT license\n' +
-        '//\n' + 
+        '//\n' +
         '// http://github.com/marionettejs/backbone.babysitter\n' +
         '\n'
     },
@@ -27,12 +27,7 @@ module.exports = function(grunt) {
         files: {
           'lib/backbone.babysitter.js' : 'src/childviewcontainer.js'
         }
-      },
-      core_amd: {
-        files: {
-          'lib/amd/backbone.babysitter.js' : 'src/amd.js'
-        }
-      },
+      }
     },
 
     concat: {
@@ -42,20 +37,12 @@ module.exports = function(grunt) {
       core: {
         src: 'lib/backbone.babysitter.js',
         dest: 'lib/backbone.babysitter.js'
-      },
-      amd: {
-        src: 'lib/amd/backbone.babysitter.js',
-        dest: 'lib/amd/backbone.babysitter.js'
       }
     },
 
     uglify : {
       options: {
         banner: "<%= meta.banner %>"
-      },
-      amd : {
-        src : 'lib/amd/backbone.babysitter.js',
-        dest : 'lib/amd/backbone.babysitter.min.js'
       },
       core : {
         src : 'lib/backbone.babysitter.js',
