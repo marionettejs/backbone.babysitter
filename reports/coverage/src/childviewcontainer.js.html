@@ -183,16 +183,16 @@
     <h1>Code coverage report for <span class="entity">src/childviewcontainer.js</span></h1>
     <h2>
         
-        Statements: <span class="metric">100% <small>(45 / 45)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">90.91% <small>(50 / 55)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class="metric">75% <small>(9 / 12)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">66.67% <small>(12 / 18)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class="metric">100% <small>(16 / 16)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">94.74% <small>(18 / 19)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class="metric">100% <small>(45 / 45)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">90.91% <small>(50 / 55)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
     </h2>
     <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">src/</a> &#187; childviewcontainer.js</div>
@@ -349,7 +349,45 @@
 148
 149
 150
-151</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -499,162 +537,187 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// Backbone.ChildViewContainer
-// ---------------------------
-//
-// Provide a container to store, retrieve and
-// shut down child views.
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">(function(root, factory) {
 &nbsp;
-Backbone.ChildViewContainer = (function(Backbone, _){
-  
-  // Container Constructor
-  // ---------------------
+  <span class="missing-if-branch" title="if path not taken"" >I</span>if (typeof define === 'function' &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >define.amd)</span> {
+<span class="cstat-no" title="statement not covered" >    define(['exports', 'backbone', 'underscore'], <span class="fstat-no" title="function not covered" >function(exports, Backbone, _) {</span></span>
+<span class="cstat-no" title="statement not covered" >      return factory(Backbone, _);</span>
+    });
+  } else <span class="missing-if-branch" title="if path not taken"" >I</span>if (typeof exports !== 'undefined') {
+<span class="cstat-no" title="statement not covered" >    var Backbone = require('backbone');</span>
+<span class="cstat-no" title="statement not covered" >    var _ = require('underscore');</span>
+<span class="cstat-no" title="statement not covered" >    module.exports = factory(Backbone, _);</span>
+  } else {
+    factory(root.Backbone, root._);
+  }
 &nbsp;
-  var Container = function(views){
-    this._views = {};
-    this._indexByModel = {};
-    this._indexByCustom = {};
-    this._updateLength();
+}(this, function(Backbone, _) {
+  "use strict";
 &nbsp;
-    _.each(views, this.add, this);
-  };
-&nbsp;
-  // Container Methods
-  // -----------------
-&nbsp;
-  _.extend(Container.prototype, {
-&nbsp;
-    // Add a view to this container. Stores the view
-    // by `cid` and makes it searchable by the model
-    // cid (and model itself). Optionally specify
-    // a custom key to store an retrieve the view.
-    add: function(view, customIndex){
-      var viewCid = view.cid;
-&nbsp;
-      // store the view
-      this._views[viewCid] = view;
-&nbsp;
-      // index it by model
-      if (view.model){
-        this._indexByModel[view.model.cid] = viewCid;
-      }
-&nbsp;
-      // index by custom
-      if (customIndex){
-        this._indexByCustom[customIndex] = viewCid;
-      }
-&nbsp;
-      this._updateLength();
-      return this;
-    },
-&nbsp;
-    // Find a view by the model that was attached to
-    // it. Uses the model's `cid` to find it.
-    findByModel: function(model){
-      return this.findByModelCid(model.cid);
-    },
-&nbsp;
-    // Find a view by the `cid` of the model that was attached to
-    // it. Uses the model's `cid` to find the view `cid` and
-    // retrieve the view using it.
-    findByModelCid: function(modelCid){
-      var viewCid = this._indexByModel[modelCid];
-      return this.findByCid(viewCid);
-    },
-&nbsp;
-    // Find a view by a custom indexer.
-    findByCustom: function(index){
-      var viewCid = this._indexByCustom[index];
-      return this.findByCid(viewCid);
-    },
-&nbsp;
-    // Find by index. This is not guaranteed to be a
-    // stable index.
-    findByIndex: function(index){
-      return _.values(this._views)[index];
-    },
-&nbsp;
-    // retrieve a view by its `cid` directly
-    findByCid: function(cid){
-      return this._views[cid];
-    },
-&nbsp;
-    // Remove a view
-    remove: function(view){
-      var viewCid = view.cid;
-&nbsp;
-      // delete model index
-      <span class="missing-if-branch" title="else path not taken"" >E</span>if (view.model){
-        delete this._indexByModel[view.model.cid];
-      }
-&nbsp;
-      // delete custom index
-      _.any(this._indexByCustom, function(cid, key) {
-        <span class="missing-if-branch" title="else path not taken"" >E</span>if (cid === viewCid) {
-          delete this._indexByCustom[key];
-          return true;
-        }
-      }, this);
-&nbsp;
-      // remove the view from the container
-      delete this._views[viewCid];
-&nbsp;
-      // update the length
-      this._updateLength();
-      return this;
-    },
-&nbsp;
-    // Call a method on every view in the container,
-    // passing parameters to the call method one at a
-    // time, like `function.call`.
-    call: function(method){
-      this.apply(method, _.tail(arguments));
-    },
-&nbsp;
-    // Apply a method on every view in the container,
-    // passing parameters to the call method one at a
-    // time, like `function.apply`.
-    apply: function(method, args){
-      _.each(this._views, function(view){
-        if (_.isFunction(view[method])){
-          view[method].apply(view, args || <span class="branch-1 cbranch-no" title="branch not covered" >[])</span>;
-        }
-      });
-    },
-&nbsp;
-    // Update the `.length` attribute on this container
-    _updateLength: function(){
-      this.length = _.size(this._views);
-    }
-  });
-&nbsp;
-  // Borrowing this code from Backbone.Collection:
-  // http://backbonejs.org/docs/backbone.html#section-106
+  // BabySitter.ChildViewContainer
+  // -----------------------------
   //
-  // Mix in methods from Underscore, for iteration, and other
-  // collection related features.
-  var methods = ['forEach', 'each', 'map', 'find', 'detect', 'filter', 
-    'select', 'reject', 'every', 'all', 'some', 'any', 'include', 
-    'contains', 'invoke', 'toArray', 'first', 'initial', 'rest', 
-    'last', 'without', 'isEmpty', 'pluck'];
+  // Provide a container to store, retrieve and
+  // shut down child views.
 &nbsp;
-  _.each(methods, function(method) {
-    Container.prototype[method] = function() {
-      var views = _.values(this._views);
-      var args = [views].concat(_.toArray(arguments));
-      return _[method].apply(_, args);
+  Backbone.ChildViewContainer = (function (Backbone, _) {
+&nbsp;
+    // Container Constructor
+    // ---------------------
+&nbsp;
+    var Container = function(views){
+      this._views = {};
+      this._indexByModel = {};
+      this._indexByCustom = {};
+      this._updateLength();
+&nbsp;
+      _.each(views, this.add, this);
     };
-  });
 &nbsp;
-  // return the public API
-  return Container;
-})(Backbone, _);
+    // Container Methods
+    // -----------------
+&nbsp;
+    _.extend(Container.prototype, {
+&nbsp;
+      // Add a view to this container. Stores the view
+      // by `cid` and makes it searchable by the model
+      // cid (and model itself). Optionally specify
+      // a custom key to store an retrieve the view.
+      add: function(view, customIndex){
+        var viewCid = view.cid;
+&nbsp;
+        // store the view
+        this._views[viewCid] = view;
+&nbsp;
+        // index it by model
+        if (view.model){
+          this._indexByModel[view.model.cid] = viewCid;
+        }
+&nbsp;
+        // index by custom
+        if (customIndex){
+          this._indexByCustom[customIndex] = viewCid;
+        }
+&nbsp;
+        this._updateLength();
+        return this;
+      },
+&nbsp;
+      // Find a view by the model that was attached to
+      // it. Uses the model's `cid` to find it.
+      findByModel: function(model){
+        return this.findByModelCid(model.cid);
+      },
+&nbsp;
+      // Find a view by the `cid` of the model that was attached to
+      // it. Uses the model's `cid` to find the view `cid` and
+      // retrieve the view using it.
+      findByModelCid: function(modelCid){
+        var viewCid = this._indexByModel[modelCid];
+        return this.findByCid(viewCid);
+      },
+&nbsp;
+      // Find a view by a custom indexer.
+      findByCustom: function(index){
+        var viewCid = this._indexByCustom[index];
+        return this.findByCid(viewCid);
+      },
+&nbsp;
+      // Find by index. This is not guaranteed to be a
+      // stable index.
+      findByIndex: function(index){
+        return _.values(this._views)[index];
+      },
+&nbsp;
+      // retrieve a view by its `cid` directly
+      findByCid: function(cid){
+        return this._views[cid];
+      },
+&nbsp;
+      // Remove a view
+      remove: function(view){
+        var viewCid = view.cid;
+&nbsp;
+        // delete model index
+        <span class="missing-if-branch" title="else path not taken"" >E</span>if (view.model){
+          delete this._indexByModel[view.model.cid];
+        }
+&nbsp;
+        // delete custom index
+        _.any(this._indexByCustom, function(cid, key) {
+          <span class="missing-if-branch" title="else path not taken"" >E</span>if (cid === viewCid) {
+            delete this._indexByCustom[key];
+            return true;
+          }
+        }, this);
+&nbsp;
+        // remove the view from the container
+        delete this._views[viewCid];
+&nbsp;
+        // update the length
+        this._updateLength();
+        return this;
+      },
+&nbsp;
+      // Call a method on every view in the container,
+      // passing parameters to the call method one at a
+      // time, like `function.call`.
+      call: function(method){
+        this.apply(method, _.tail(arguments));
+      },
+&nbsp;
+      // Apply a method on every view in the container,
+      // passing parameters to the call method one at a
+      // time, like `function.apply`.
+      apply: function(method, args){
+        _.each(this._views, function(view){
+          if (_.isFunction(view[method])){
+            view[method].apply(view, args || <span class="branch-1 cbranch-no" title="branch not covered" >[])</span>;
+          }
+        });
+      },
+&nbsp;
+      // Update the `.length` attribute on this container
+      _updateLength: function(){
+        this.length = _.size(this._views);
+      }
+    });
+&nbsp;
+    // Borrowing this code from Backbone.Collection:
+    // http://backbonejs.org/docs/backbone.html#section-106
+    //
+    // Mix in methods from Underscore, for iteration, and other
+    // collection related features.
+    var methods = ['forEach', 'each', 'map', 'find', 'detect', 'filter',
+      'select', 'reject', 'every', 'all', 'some', 'any', 'include',
+      'contains', 'invoke', 'toArray', 'first', 'initial', 'rest',
+      'last', 'without', 'isEmpty', 'pluck'];
+&nbsp;
+    _.each(methods, function(method) {
+      Container.prototype[method] = function() {
+        var views = _.values(this._views);
+        var args = [views].concat(_.toArray(arguments));
+        return _[method].apply(_, args);
+      };
+    });
+&nbsp;
+    // return the public API
+    return Container;
+  })(Backbone, _);
+&nbsp;
+  return Backbone.ChildViewContainer;
+&nbsp;
+}));
 &nbsp;</pre></td></tr>
 </table></pre>
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Jan 31 2014 17:37:16 GMT-0500 (EST)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Apr 25 2014 17:19:19 GMT-0400 (EDT)</div>
 </div>
 
 <script src="../prettify.js"></script>

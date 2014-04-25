@@ -1,5 +1,8 @@
 # Change log
 
+### v0.1.1
+* Remove AMD builds and replace with a single UMD style wrapper.
+
 ### v0.1.0
 * allow chaining of add and remove methods
 * add component.json
