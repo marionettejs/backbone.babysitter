@@ -22,7 +22,7 @@
   ],
 
   "scripts": [
-    "lib/amd/backbone.babysitter.js"
+    "lib/backbone.babysitter.js"
   ],
 
   "author": {
