@@ -24,9 +24,20 @@ module.exports = function(grunt) {
 
     preprocess: {
       core_build: {
-        files: {
-          'lib/backbone.babysitter.js' : 'src/childviewcontainer.js'
+        src: 'src/childviewcontainer.js',
+        dest: 'lib/backbone.babysitter.js'
+      }
+    },
+
+    template: {
+      options: {
+        data: {
+          version: '<%= meta.version %>'
         }
+      },
+      core: {
+        src: '<%= preprocess.core_build.dest %>',
+        dest: '<%= preprocess.core_build.dest %>'
       }
     },
 
@@ -117,6 +128,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-preprocess');
+  grunt.loadNpmTasks('grunt-template');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -132,6 +144,6 @@ module.exports = function(grunt) {
   grunt.registerTask('server', ['jasmine:babysitter:build', 'connect:server', 'watch:server']);
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'jasmine:coverage', 'preprocess', 'concat', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'jasmine:coverage', 'preprocess', 'template', 'concat', 'uglify']);
 
 };

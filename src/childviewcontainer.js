@@ -15,6 +15,8 @@
 }(this, function(Backbone, _) {
   "use strict";
 
+  var previousChildViewContainer = Backbone.ChildViewContainer;
+
   // BabySitter.ChildViewContainer
   // -----------------------------
   //
@@ -165,6 +167,13 @@
     // return the public API
     return Container;
   })(Backbone, _);
+
+  Backbone.ChildViewContainer.VERSION = '<%= version %>';
+
+  Backbone.ChildViewContainer.noConflict = function () {
+    Backbone.ChildViewContainer = previousChildViewContainer;
+    return this;
+  };
 
   return Backbone.ChildViewContainer;
 
