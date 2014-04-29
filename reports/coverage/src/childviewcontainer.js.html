@@ -100,6 +100,11 @@
         .cstat-no { background: #fc8c84; color: #111; }
         .fstat-no { background: #ffc520; color: #111 !important; }
         .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
         .missing-if-branch {
             display: inline-block;
             margin-right: 10px;
@@ -107,9 +112,18 @@
             padding: 0 4px;
             background: black;
             color: yellow;
-            xtext-decoration: line-through;
         }
-        .missing-if-branch .typ {
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
             color: inherit !important;
         }
 
@@ -176,6 +190,8 @@
             margin: 0 !important;
         }
         .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
     </style>
 </head>
 <body>
@@ -183,17 +199,18 @@
     <h1>Code coverage report for <span class="entity">src/childviewcontainer.js</span></h1>
     <h2>
         
-        Statements: <span class="metric">90.91% <small>(50 / 55)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">88.33% <small>(53 / 60)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
         Branches: <span class="metric">66.67% <small>(12 / 18)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class="metric">94.74% <small>(18 / 19)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">90% <small>(18 / 20)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class="metric">90.91% <small>(50 / 55)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">88.33% <small>(53 / 60)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">src/</a> &#187; childviewcontainer.js</div>
 </div>
@@ -370,7 +387,16 @@
 169
 170
 171
-172</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -386,6 +412,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -540,14 +568,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">(function(root, factory) {
 &nbsp;
-  <span class="missing-if-branch" title="if path not taken"" >I</span>if (typeof define === 'function' &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >define.amd)</span> {
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof define === 'function' &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >define.amd)</span> {
 <span class="cstat-no" title="statement not covered" >    define(['exports', 'backbone', 'underscore'], <span class="fstat-no" title="function not covered" >function(exports, Backbone, _) {</span></span>
 <span class="cstat-no" title="statement not covered" >      return factory(Backbone, _);</span>
     });
-  } else <span class="missing-if-branch" title="if path not taken"" >I</span>if (typeof exports !== 'undefined') {
+  } else <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof exports !== 'undefined') {
 <span class="cstat-no" title="statement not covered" >    var Backbone = require('backbone');</span>
 <span class="cstat-no" title="statement not covered" >    var _ = require('underscore');</span>
 <span class="cstat-no" title="statement not covered" >    module.exports = factory(Backbone, _);</span>
@@ -557,6 +592,8 @@
 &nbsp;
 }(this, function(Backbone, _) {
   "use strict";
+&nbsp;
+  var previousChildViewContainer = Backbone.ChildViewContainer;
 &nbsp;
   // BabySitter.ChildViewContainer
   // -----------------------------
@@ -643,13 +680,13 @@
         var viewCid = view.cid;
 &nbsp;
         // delete model index
-        <span class="missing-if-branch" title="else path not taken"" >E</span>if (view.model){
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (view.model){
           delete this._indexByModel[view.model.cid];
         }
 &nbsp;
         // delete custom index
         _.any(this._indexByCustom, function(cid, key) {
-          <span class="missing-if-branch" title="else path not taken"" >E</span>if (cid === viewCid) {
+          <span class="missing-if-branch" title="else path not taken" >E</span>if (cid === viewCid) {
             delete this._indexByCustom[key];
             return true;
           }
@@ -709,6 +746,13 @@
     return Container;
   })(Backbone, _);
 &nbsp;
+  Backbone.ChildViewContainer.VERSION = '&lt;%= version %&gt;';
+&nbsp;
+  Backbone.ChildViewContainer.noConflict = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    Backbone.ChildViewContainer = previousChildViewContainer;</span>
+<span class="cstat-no" title="statement not covered" >    return this;</span>
+  };
+&nbsp;
   return Backbone.ChildViewContainer;
 &nbsp;
 }));
@@ -717,7 +761,7 @@
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Apr 25 2014 17:19:19 GMT-0400 (EDT)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Apr 29 2014 15:41:40 GMT-0400 (EDT)</div>
 </div>
 
 <script src="../prettify.js"></script>

@@ -1,5 +1,11 @@
 # Change log
 
+### v0.1.2
+
+* Add .VERSION and n.oConflict
+* General cleanups to tests and package.json
+* Add travis build info
+
 ### v0.1.1
 * Remove AMD builds and replace with a single UMD style wrapper.
 
