@@ -52,32 +52,5 @@
     "grunt-contrib-watch": "~0.2.0",
     "grunt-contrib-connect": "~0.1.2",
     "grunt-template": "^0.2.3"
-  },
-  "jam": {
-    "dependencies": {
-      "backbone": ">=0.9.9",
-      "underscore": ">=1.4.0"
-    },
-    "main": "lib/amd/backbone.babysitter.js",
-    "include": [
-      "lib/amd/backbone.babysitter.js",
-      "readme.md"
-    ]
-  },
-  "maintainers": [
-    {
-      "name": "Stefan Zerkalica",
-      "email": "zerkalica@gmail.com",
-      "web": "https://github.com/zerkalica"
-    },
-    {
-      "name": "Richard Mitchell",
-      "email": "richard.j.mitchell@gmail.com"
-    },
-    {
-      "name": "Joe Gornick",
-      "web": "http://joegornick.com",
-      "twitter": "https://twitter.com/jgornick"
-    }
-  ]
+  }
 }
