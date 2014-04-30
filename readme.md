@@ -20,17 +20,9 @@ list of views.
 Grab the source from the `src` folder above. Grab the most recent builds
 from the links below.
 
-### Standard Builds
-
 * Development: [backbone.babysitter.js](https://raw.github.com/marionettejs/backbone.babysitter/master/lib/backbone.babysitter.js)
 
 * Production: [backbone.babysitter.min.js](https://raw.github.com/marionettejs/backbone.babysitter/master/lib/backbone.babysitter.min.js)
-
-### RequireJS (AMD) Builds
-
-* Development: [backbone.babysitter.js](https://raw.github.com/marionettejs/backbone.babysitter/master/lib/amd/backbone.babysitter.js)
-
-* Production: [backbone.babysitter.min.js](https://raw.github.com/marionettejs/backbone.babysitter/master/lib/amd/backbone.babysitter.min.js)
 
 ## Documentation
 
