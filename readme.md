@@ -26,12 +26,6 @@ from the links below.
 
 * Production: [backbone.babysitter.min.js](https://raw.github.com/marionettejs/backbone.babysitter/master/lib/backbone.babysitter.min.js)
 
-### RequireJS (AMD) Builds
-
-* Development: [backbone.babysitter.js](https://raw.github.com/marionettejs/backbone.babysitter/master/lib/amd/backbone.babysitter.js)
-
-* Production: [backbone.babysitter.min.js](https://raw.github.com/marionettejs/backbone.babysitter/master/lib/amd/backbone.babysitter.min.js)
-
 ## Documentation
 
 Backbone.BabySitter exposes one constructor function: `Backbone.ChildViewContainer`.
