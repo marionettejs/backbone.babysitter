@@ -77,16 +77,6 @@ module.exports = function(grunt) {
           'public/javascripts/backbone.js'
         ],
       },
-      coverage : {
-        src : '<%= jasmine.babysitter.src %>',
-        options : {
-          template : require('grunt-template-jasmine-istanbul'),
-          templateOptions: {
-            coverage: 'reports/coverage.json',
-            report: 'reports/coverage'
-          }
-        }
-      },
       babysitter : {
         src : ['src/*.js']
       }
@@ -98,15 +88,7 @@ module.exports = function(grunt) {
       },
       babysitter : [ 'src/*.js' ]
     },
-    plato: {
-      babysitter : {
-        src : 'src/*.js',
-        dest : 'reports',
-        options : {
-          jshint : grunt.file.readJSON('.jshintrc')
-        }
-      }
-    },
+
     watch: {
       babysitter : {
         files : ['src/*.js', 'spec/**/*.js'],
@@ -135,7 +117,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-plato');
 
   grunt.registerTask('test', ['jshint', 'jasmine:babysitter']);
 
@@ -144,6 +125,6 @@ module.exports = function(grunt) {
   grunt.registerTask('server', ['jasmine:babysitter:build', 'connect:server', 'watch:server']);
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'jasmine:coverage', 'preprocess', 'template', 'concat', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'jasmine:babysitter', 'preprocess', 'template', 'concat', 'uglify']);
 
 };
