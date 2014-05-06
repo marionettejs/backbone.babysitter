@@ -23,8 +23,8 @@ module.exports = function(grunt) {
     },
 
     preprocess: {
-      core_build: {
-        src: 'src/childviewcontainer.js',
+      umd: {
+        src: 'src/build/backbone.babysitter.js',
         dest: 'lib/backbone.babysitter.js'
       }
     },
@@ -35,9 +35,9 @@ module.exports = function(grunt) {
           version: '<%= meta.version %>'
         }
       },
-      core: {
-        src: '<%= preprocess.core_build.dest %>',
-        dest: '<%= preprocess.core_build.dest %>'
+      umd: {
+        src: '<%= preprocess.umd.dest %>',
+        dest: '<%= preprocess.umd.dest %>'
       }
     },
 
@@ -45,9 +45,9 @@ module.exports = function(grunt) {
       options: {
         banner: "<%= meta.banner %>"
       },
-      core: {
-        src: 'lib/backbone.babysitter.js',
-        dest: 'lib/backbone.babysitter.js'
+      umd: {
+        src: '<%= preprocess.umd.dest %>',
+        dest: '<%= preprocess.umd.dest %>'
       }
     },
 
@@ -55,7 +55,7 @@ module.exports = function(grunt) {
       options: {
         banner: "<%= meta.banner %>"
       },
-      core : {
+      umd : {
         src : 'lib/backbone.babysitter.js',
         dest : 'lib/backbone.babysitter.min.js',
         options : {
