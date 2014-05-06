@@ -42,7 +42,7 @@ describe("childview container", function(){
 
     it("should update the size of the chidren", function(){
       expect(container.length).toBe(1);
-    })
+    });
   });
 
   describe("when adding a view that has a model, to the container", function(){
@@ -84,26 +84,97 @@ describe("childview container", function(){
     });
   });
 
+  describe("when adding a view at a particular index", function(){
+    var container, view, view2, cust, foundView;
+
+    beforeEach(function(){
+      var views = [
+        new Backbone.View(),
+        new Backbone.View(),
+        new Backbone.View()
+      ];
+
+      cust = 'custom index';
+
+      view = new Backbone.View();
+      view2 = new Backbone.View();
+
+      container = new Backbone.ChildViewContainer(views);
+
+      container.add(view2, {customIndex: cust});
+      container.add(view, {at: 2});
+
+      foundView = container.findByIndex(2);
+    });
+
+    it("should make the view retrievable by the index", function(){
+      expect(foundView).toBe(view);
+    });
+
+    it("should update the size of the chidren", function(){
+      expect(container.length).toBe(5);
+    });
+
+    describe("and getting a view using a custom index", function(){
+      it("should get the correct view", function(){
+        var v = container.findByCustom(cust);
+        expect(v).toBe(view2);
+      });
+    });
+
+    describe("when adding at an index out of range", function(){
+      beforeEach(function(){
+        view = new Backbone.View();
+
+        container.add(view, {at: 7});
+
+        foundView = container.findByIndex(7);
+      });
+
+      it("should add to end of the container", function(){
+        expect(foundView).toBe(undefined);
+        expect(container.findByIndex(5)).toBe(view);
+      })
+    });
+  });
+
   describe("when removing a view", function(){
-    var container, view, model, col, cust;
+    var container, view, view2, views, model, col, cust, cust2;
 
     beforeEach(function(){
       model = new Backbone.Model();
-      cust = "custome indexer";
+      cust = "custom indexer";
+      cust2 = "another custom indexer";
 
       view = new Backbone.View({
         model: model
       });
 
-      container = new Backbone.ChildViewContainer();
-      container.add(view, cust);
+      view2 = new Backbone.View({
+        model: model
+      });
+
+      views = [
+        new Backbone.View(),
+        new Backbone.View(),
+        new Backbone.View()
+      ];
+
+      container = new Backbone.ChildViewContainer(views);
+      container.add(view, {customIndex: cust, at: 1});
+      container.add(view2, {customIndex: cust2});
 
       container.remove(view);
     });
 
     it("should update the size of the chidren", function(){
-      expect(container.length).toBe(0);
-    })
+      expect(container.length).toBe(4);
+    });
+
+    it("should update the indexes of the other views", function(){
+      var v = container.findByIndex(2);
+      expect(v).toBe(views[2]);
+    });
 
     it("should remove the index by model", function(){
       var v = container.findByModel(model);
@@ -118,6 +189,13 @@ describe("childview container", function(){
     it("should remove the view from the container", function(){
       var v = container.findByCid(view.cid);
       expect(v).toBeUndefined();
+    });
+
+    describe("and then getting a view by a custom index", function(){
+      it("should get the correct view", function(){
+        var v = container.findByCustom(cust2);
+        expect(v).toBe(view2);
+      });
     });
   });
 

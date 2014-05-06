@@ -29,8 +29,9 @@
     // ---------------------
 
     var Container = function(views){
-      this._views = {};
+      this._views = [];
       this._indexByModel = {};
+      this._indexByCid = {};
       this._indexByCustom = {};
       this._updateLength();
 
@@ -46,23 +47,47 @@
       // by `cid` and makes it searchable by the model
       // cid (and model itself). Optionally specify
       // a custom key to store an retrieve the view.
-      add: function(view, customIndex){
+      add: function(view, options){
+        var addOptions = options || {};
+
         var viewCid = view.cid;
+        var customIndex = addOptions.customIndex || addOptions;
+
+        // add at the specified index or append to the end
+        var index = addOptions.at || this._views.length;
+
+        if (index > this._views.length) {
+          index = this._views.length;
+        }
 
         // store the view
-        this._views[viewCid] = view;
+        // if an index is specified we need to insert
+        // at that index, otherwise just append.
+        if (index < this._views.length) {
+          this._views.splice(index, 0, view);
+        }
+        else {
+          this._views[index] = view;
+        }
+
+        // increment other indices before indexing the new view
+        this._incrementIndices(index);
+
+        // index it by Cid
+        this._indexByCid[viewCid] = index;
 
         // index it by model
         if (view.model){
-          this._indexByModel[view.model.cid] = viewCid;
+          this._indexByModel[view.model.cid] = index;
         }
 
         // index by custom
         if (customIndex){
-          this._indexByCustom[customIndex] = viewCid;
+          this._indexByCustom[customIndex] = index;
         }
 
         this._updateLength();
+
         return this;
       },
 
@@ -76,30 +101,36 @@
       // it. Uses the model's `cid` to find the view `cid` and
       // retrieve the view using it.
       findByModelCid: function(modelCid){
-        var viewCid = this._indexByModel[modelCid];
-        return this.findByCid(viewCid);
+        var index = this._indexByModel[modelCid];
+        return this.findByIndex(index);
       },
 
       // Find a view by a custom indexer.
-      findByCustom: function(index){
-        var viewCid = this._indexByCustom[index];
-        return this.findByCid(viewCid);
+      findByCustom: function(customIndex){
+        var index = this._indexByCustom[customIndex];
+        return this.findByIndex(index);
       },
 
-      // Find by index. This is not guaranteed to be a
-      // stable index.
+      // Find by index.
       findByIndex: function(index){
-        return _.values(this._views)[index];
+        return this._views[index];
       },
 
       // retrieve a view by its `cid` directly
       findByCid: function(cid){
-        return this._views[cid];
+        var index = this._indexByCid[cid];
+        return this._views[index];
       },
 
       // Remove a view
       remove: function(view){
         var viewCid = view.cid;
+
+        // get view index
+        var viewIndex = this._indexByCid[viewCid];
+
+        // delete cid index
+        delete this._indexByCid[viewCid];
 
         // delete model index
         if (view.model){
@@ -107,18 +138,21 @@
         }
 
         // delete custom index
-        _.any(this._indexByCustom, function(cid, key) {
-          if (cid === viewCid) {
+        _.any(this._indexByCustom, function(index, key) {
+          if (index === viewIndex) {
             delete this._indexByCustom[key];
             return true;
           }
         }, this);
 
         // remove the view from the container
-        delete this._views[viewCid];
+        this._views.splice(viewIndex, 1);
 
         // update the length
         this._updateLength();
+
+        // decrement the indices
+        this._decrementIndices(viewIndex);
         return this;
       },
 
@@ -142,8 +176,35 @@
 
       // Update the `.length` attribute on this container
       _updateLength: function(){
-        this.length = _.size(this._views);
+        this.length = this._views.length;
+      },
+
+      // decrement indices after the removed one
+      _decrementIndices: function(removedIndex){
+        var decrementIndex = function (value, key, list) {
+          if (removedIndex < value) {
+            list[key]--;
+          }
+        };
+
+        _.each(this._indexByCustom, decrementIndex);
+        _.each(this._indexByCid, decrementIndex);
+        _.each(this._indexByModel, decrementIndex);
+      },
+
+      // increment indices after the added one
+      _incrementIndices: function(addedIndex){
+        var incrementIndex = function (value, key, list) {
+          if (addedIndex <= value) {
+            list[key]++;
+          }
+        };
+
+        _.each(this._indexByCustom, incrementIndex);
+        _.each(this._indexByCid, incrementIndex);
+        _.each(this._indexByModel, incrementIndex);
       }
+
     });
 
     // Borrowing this code from Backbone.Collection:
