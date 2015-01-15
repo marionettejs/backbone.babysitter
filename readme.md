@@ -178,6 +178,7 @@ provide iterators and other collection functions, including:
 * forEach
 * each
 * map
+* reduce
 * find
 * detect
 * filter

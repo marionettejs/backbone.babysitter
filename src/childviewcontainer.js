@@ -135,7 +135,7 @@ Backbone.ChildViewContainer = (function (Backbone, _) {
   var methods = ['forEach', 'each', 'map', 'find', 'detect', 'filter',
     'select', 'reject', 'every', 'all', 'some', 'any', 'include',
     'contains', 'invoke', 'toArray', 'first', 'initial', 'rest',
-    'last', 'without', 'isEmpty', 'pluck'];
+    'last', 'without', 'isEmpty', 'pluck', 'reduce'];
 
   _.each(methods, function(method) {
     Container.prototype[method] = function() {
