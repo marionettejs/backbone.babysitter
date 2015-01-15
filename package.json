@@ -29,7 +29,7 @@
     "web": "http://derickbailey.lostechies.com"
   },
   "bugs": {
-    "web": "https://github.com/marionettejs/backbone.babysitter/issues"
+    "url": "https://github.com/marionettejs/backbone.babysitter/issues"
   },
   "repository": {
     "type": "git",
