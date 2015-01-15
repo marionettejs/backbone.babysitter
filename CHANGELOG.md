@@ -1,5 +1,9 @@
 # Change log
 
+### v0.1.6
+
+* Expose `reduce` to babysitter collections. Thanks @romanbsd
+
 ### v0.1.5
 
 * Minor updates to bower.json
