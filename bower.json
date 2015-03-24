@@ -26,6 +26,14 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "public",
+    "specs",
+    ".gitignore",
+    ".jshintrc",
+    ".travis.yml",
+    "Gruntfile.js",
+    "component.json",
+    "package.json"
   ]
 }
