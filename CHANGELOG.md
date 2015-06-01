@@ -1,5 +1,9 @@
 # Change log
 
+### v0.1.7
+
+* Bump version range of backbone support.
+
 ### v0.1.6
 
 * Expose `reduce` to babysitter collections. Thanks @romanbsd
