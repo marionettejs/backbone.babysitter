@@ -32,7 +32,7 @@
   },
 
   "dependencies": {
-    "jashkenas/backbone": "*",
-    "jashkenas/underscore": "*"
+    "jashkenas/backbone": ">=0.9.9 <=1.2.1",
+    "jashkenas/underscore": ">=1.4.0 <=1.8.3"
   }
 }
