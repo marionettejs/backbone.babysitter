@@ -29,7 +29,7 @@
     "web": "http://derickbailey.lostechies.com"
   },
   "dependencies": {
-    "jashkenas/backbone": ">=0.9.9 <=1.2.1",
+    "jashkenas/backbone": ">=0.9.9 <=1.2.2",
     "jashkenas/underscore": ">=1.4.0 <=1.8.3"
   }
 }
