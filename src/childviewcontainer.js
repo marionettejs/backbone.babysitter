@@ -86,6 +86,7 @@ Backbone.ChildViewContainer = (function (Backbone, _) {
       // delete model index
       if (view.model){
         delete this._indexByModel[view.model.cid];
+        delete this._indexByModel[view.model.id];
       }
 
       // delete custom index
