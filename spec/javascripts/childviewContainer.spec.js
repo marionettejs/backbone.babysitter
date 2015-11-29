@@ -49,7 +49,7 @@ describe("childview container", function(){
     var container, view, foundView, model;
 
     beforeEach(function(){
-      model = new Backbone.Model();
+      model = new Backbone.Model({'id': 123});
       view = new Backbone.View({
         model: model
       });
