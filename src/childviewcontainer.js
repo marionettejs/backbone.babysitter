@@ -15,7 +15,7 @@ Backbone.ChildViewContainer = (function (Backbone, _) {
     this._indexByCustom = {};
     this._updateLength();
 
-    _.each(views, this.add, this);
+    _.each(views, _.bind(this.add, this));
   };
 
   // Container Methods
@@ -88,12 +88,12 @@ Backbone.ChildViewContainer = (function (Backbone, _) {
       }
 
       // delete custom index
-      _.any(this._indexByCustom, function(cid, key) {
+      _.some(this._indexByCustom, _.bind(function(cid, key) {
         if (cid === viewCid) {
           delete this._indexByCustom[key];
           return true;
         }
-      }, this);
+      }, this));
 
       // remove the view from the container
       delete this._views[viewCid];
@@ -107,7 +107,7 @@ Backbone.ChildViewContainer = (function (Backbone, _) {
     // passing parameters to the call method one at a
     // time, like `function.call`.
     call: function(method){
-      this.apply(method, _.tail(arguments));
+      this.apply(method, _.toArray(arguments).slice(1));
     },
 
     // Apply a method on every view in the container,
