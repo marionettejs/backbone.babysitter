@@ -65,27 +65,8 @@ Backbone.ChildViewContainer = (function (Backbone, _) {
 
     // Remove a view
     remove: function(view){
-      var viewCid = view.cid;
-
-      // delete model index
-      if (view.model){
-        delete this._indexByModel[view.model.cid];
-      }
-
-      // delete custom index
-      _.some(this._indexByCustom, _.bind(function(cid, key) {
-        if (cid === viewCid) {
-          delete this._indexByCustom[key];
-          return true;
-        }
-      }, this));
-
-      // remove the view from the container
-      delete this._views[viewCid];
-
-      // update the length
-      this._updateLength();
-      return this;
+      return this._remove(view)
+                 ._updateLength();
     },
 
     // Call a method on every view in the container,
@@ -130,6 +111,30 @@ Backbone.ChildViewContainer = (function (Backbone, _) {
       if (customIndex){
         this._indexByCustom[customIndex] = viewCid;
       }
+
+      return this;
+    },
+    // To be used when avoiding call _updateLength
+    // When you are done adding all your new views
+    // call _updateLength
+    _remove: function (view){
+      var viewCid = view.cid;
+
+      // delete model index
+      if (view.model){
+        delete this._indexByModel[view.model.cid];
+      }
+
+      // delete custom index
+      _.some(this._indexByCustom, _.bind(function(cid, key) {
+        if (cid === viewCid) {
+          delete this._indexByCustom[key];
+          return true;
+        }
+      }, this));
+
+      // remove the view from the container
+      delete this._views[viewCid];
 
       return this;
     }
