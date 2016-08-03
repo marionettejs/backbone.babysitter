@@ -1,5 +1,9 @@
 # Change log
 
+### v1.0.0-pre.2
+
+* Updated Backbone and Underscore version ranges
+
 ### v1.0.0-pre.1
 
 * Moved Backbone and Underscore to peerDependencies
