@@ -36,6 +36,7 @@ Backbone.ChildViewContainer = (function (Backbone, _) {
       // index it by model
       if (view.model){
         this._indexByModel[view.model.cid] = viewCid;
+        if ( view.model.id ) this._indexByModel[view.model.id] = viewCid;
       }
 
       // index by custom
@@ -47,10 +48,10 @@ Backbone.ChildViewContainer = (function (Backbone, _) {
       return this;
     },
 
-    // Find a view by the model that was attached to
-    // it. Uses the model's `cid` to find it.
+    // Find a view by the model that was attached to it.
+    // Uses the model's `id` to find it.
     findByModel: function(model){
-      return this.findByModelCid(model.cid);
+      return this.findByModelCid(model.id);
     },
 
     // Find a view by the `cid` of the model that was attached to
@@ -85,6 +86,7 @@ Backbone.ChildViewContainer = (function (Backbone, _) {
       // delete model index
       if (view.model){
         delete this._indexByModel[view.model.cid];
+        delete this._indexByModel[view.model.id];
       }
 
       // delete custom index
