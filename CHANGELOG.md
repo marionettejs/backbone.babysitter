@@ -1,5 +1,9 @@
 # Change log
 
+### v1.0.0
+
+* Updated Backbone and Underscore version ranges again
+
 ### v1.0.0-pre.2
 
 * Updated Backbone and Underscore version ranges
